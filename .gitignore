@@ -27,3 +27,6 @@ fortune_elixir-*.tar
 
 # git-secret files
 config/secret.exs
+
+# ssl cert
+priv/ssl/
