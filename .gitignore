@@ -24,3 +24,6 @@ fortune_elixir-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# git-secret files
+config/secret.exs
