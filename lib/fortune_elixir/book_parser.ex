@@ -1,6 +1,7 @@
 defmodule FortuneElixir.BookParser do
   @str_limit 50
   @page_limit 30
+  @books_folder "priv/books/"
 
   # {pages_count, result} = FortuneElixir.BookParser.test
   def test do
@@ -9,6 +10,19 @@ defmodule FortuneElixir.BookParser do
     |> Stream.map(&String.split/1)
     |> Enum.concat
     |> make_pages
+  end
+
+  def parse_book_from_txt(book) do
+    filename = @books_folder <> Atom.to_string(book) <> ".txt"
+
+    {pages_count, book_map} =
+      filename
+      |> File.stream!()
+      |> Stream.map(&String.split/1)
+      |> Enum.concat
+      |> make_pages
+
+    :ets.insert(:books, {book, pages_count, book_map})
   end
 
   # second param:
