@@ -7,12 +7,12 @@ defmodule FortuneElixir.Application do
 
   def start(_type, _args) do
     children = [
-      # Plug.Cowboy.child_spec(
-      #   Application.get_env(:fortune_elixir, :plug_opts)
-      # )
+      Plug.Cowboy.child_spec(
+        Application.get_env(:fortune_elixir, :plug_opts)
+      )
     ]
 
-    FortuneElixir.Storage.init()
+    # FortuneElixir.Storage.init()
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

@@ -13,7 +13,7 @@ defmodule FortuneElixir.BookParser do
   end
 
   def parse_book_from_txt(book) do
-    filename = @books_folder <> Atom.to_string(book) <> ".txt"
+    filename = @books_folder <> book <> ".txt"
 
     {pages_count, book_map} =
       filename
