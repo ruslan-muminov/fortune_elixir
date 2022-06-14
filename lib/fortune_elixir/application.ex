@@ -12,7 +12,7 @@ defmodule FortuneElixir.Application do
       )
     ]
 
-    # FortuneElixir.Storage.init()
+    FortuneElixir.Storage.init()
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
