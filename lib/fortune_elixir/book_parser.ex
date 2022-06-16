@@ -3,9 +3,9 @@ defmodule FortuneElixir.BookParser do
   @page_limit 30
   @books_folder "priv/books/"
 
-  # {pages_count, result} = FortuneElixir.BookParser.test
-  def test do
-    "priv/books/pratchett_moris.txt"
+  # {pages_count, result} = FortuneElixir.BookParser.test("bible.txt")
+  def test(book) do
+    "priv/books/" <> book
     |> File.stream!()
     |> Stream.map(&String.split/1)
     |> Enum.concat

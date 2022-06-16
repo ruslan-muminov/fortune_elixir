@@ -3,6 +3,8 @@ defmodule FortuneElixir.Application do
   # for more information on OTP Applications
   @moduledoc false
 
+  require Logger
+
   use Application
 
   def start(_type, _args) do
@@ -12,7 +14,12 @@ defmodule FortuneElixir.Application do
       )
     ]
 
+    start = DateTime.utc_now |> DateTime.to_unix
     FortuneElixir.Storage.init()
+    init_time =  DateTime.to_unix(DateTime.utc_now) - start
+    Logger.info("Storage init time: #{init_time} s")
+
+    FortuneElixir.UserProcess.start_link()
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

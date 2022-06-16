@@ -1,4 +1,6 @@
 defmodule FortuneElixir.Endpoint do
+  alias FortuneElixir.MessageHandler
+
   use Plug.Router
 
   require Logger
@@ -16,20 +18,14 @@ defmodule FortuneElixir.Endpoint do
   end
 
   post "#{@request_token}/fortune" do
-    %{"message" => %{"chat" => %{"id" => chat_id}, "text" => text}} = conn.body_params
-
-    :fortune_elixir
-    |> Application.get_env(:bot_token)
-    |> Telegram.Api.request("sendMessage", chat_id: chat_id, text: text, disable_notification: true)
-
-    send_resp(conn, 200, "")
+    MessageHandler.handle_message(conn)
   end
 
   match _ do
     send_resp(conn, 404, "ooops... Nothing there :(")
   end
 
-  # def call_send_resp(conn) do
-  #   send_resp(conn, 200, "")
-  # end
+  def call_send_resp(conn) do
+    send_resp(conn, 200, "")
+  end
 end
